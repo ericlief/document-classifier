@@ -13,7 +13,7 @@ from sklearn.svm import LinearSVC
 from sklearn.multiclass import OneVsRestClassifier
 
 
-def collection_stats():
+def collection_stats():i
     # List of documents
     documents = reuters.fileids()
     print(str(len(documents)) + " documents")
@@ -89,8 +89,8 @@ vectorised_train_documents = vectorizer.fit_transform(train_docs) # return term-
 #print("number of doc =", vectorised_train_documents[0].
 vectorised_test_documents = vectorizer.transform(test_docs)  # return doc-term matrix
 
-print(vectorised_train_documents[:10])
-print(vectorised_test_documents)
+#print(vectorised_train_documents[:10])
+#print(vectorised_test_documents)
 
 
 # Transform multilabel labels

@@ -9,7 +9,7 @@ from keras.preprocessing.text import Tokenizer
 word_index = reuters.get_word_index(path="reuters_word_index.json")
 idx_to_word = dict(zip(word_index.values(), word_index.keys()))
 
-max_words = 1000
+max_words = 100
 batch_size = 32
 epochs = 5
 
@@ -18,10 +18,10 @@ print('Loading data...')
 print(len(x_train), 'train sequences')
 print(len(x_test), 'test sequences')
 
-print(x_train[1], y_train[1])
-print("words")
-words = [idx_to_word[i] for i in x_train[1]]
-print(" ".join(words))
+#print(x_train[1], y_train[1])
+#print("words")
+#words = [idx_to_word[i] for i in x_train[1]]
+#print(" ".join(words))
 
 
 num_classes = np.max(y_train) + 1
@@ -31,9 +31,9 @@ print('Vectorizing sequence data...')
 tokenizer = Tokenizer(num_words=max_words)
 x_train = tokenizer.sequences_to_matrix(x_train, mode='binary')
 
-print(x_train[0], y_train[0])
+#print(x_train[0], y_train[0])
 
-"""
+
 x_test = tokenizer.sequences_to_matrix(x_test, mode='binary')
 print('x_train shape:', x_train.shape)
 print('x_test shape:', x_test.shape)
@@ -47,7 +47,7 @@ print('y_test shape:', y_test.shape)
 
 print('Building model...')
 model = Sequential()
-model.add(Dense(512, input_shape=(max_words,)))
+model.add(Dense(.5*max_words, input_shape=(max_words,)))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes))
@@ -64,6 +64,10 @@ history = model.fit(x_train, y_train,
                     validation_split=0.1)
 score = model.evaluate(x_test, y_test,
                        batch_size=batch_size, verbose=1)
-print('Test score:', score[0])
-print('Test accuracy:', score[1])
-"""
+
+with open('results-keras.txt', 'wt') as f:
+
+    print('Test score:', score[0])
+    print('Test accuracy:', score[1])
+    f.write("Test score" + str(score[0]) + '\n')
+    f.write("Test acc" + str(score[0]) + '\n')
