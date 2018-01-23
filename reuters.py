@@ -1,4 +1,4 @@
-\from nltk.corpus import reuters
+from nltk.corpus import reuters
 import nltk as nltk
 from nltk import word_tokenize
 from nltk.stem.porter import PorterStemmer
@@ -69,6 +69,7 @@ def tokenize(text):
 
 
 # List of document ids
+stop_words = stopwords.words("english")
 documents = reuters.fileids()
 train_docs_id = list(filter(lambda doc: doc.startswith("train"), documents))
 test_docs_id = list(filter(lambda doc: doc.startswith("test"),
